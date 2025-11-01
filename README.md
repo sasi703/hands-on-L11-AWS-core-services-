@@ -1,5 +1,5 @@
 
-# 🧠 AWS Core Services Hands-On: S3, Glue, CloudWatch, and Athena  
+#  AWS Core Services Hands-On: S3, Glue, CloudWatch, and Athena  
 
 **Course:** ITCS 6190/8190 – Cloud Computing for Data Analysis  
 **Instructor:** Marco Vieira  
@@ -7,7 +7,7 @@
 
 ---
 
-## 📘 Objective  
+## Objective  
 
 This hands-on lab demonstrates how to use core AWS analytics services — **S3**, **IAM**, **Glue**, **CloudWatch**, and **Athena** — to ingest, catalog, and query e-commerce sales data in a cloud-native environment.  
 
@@ -24,7 +24,7 @@ Dataset: [E-Commerce Sales Data (Kaggle)](https://www.kaggle.com/datasets/thedev
 
 ## ⚙️ AWS Workflow Steps  
 
-### 1️⃣ S3 Setup  
+###  S3 Setup  
 - Created two buckets:  
   - `ecommerce-raw-data` – for raw CSV uploads.  
   - `ecommerce-processed-data` – for Athena query outputs.  
@@ -37,52 +37,52 @@ Dataset: [E-Commerce Sales Data (Kaggle)](https://www.kaggle.com/datasets/thedev
   - `P L March 2021.csv`  
   - `May-2022.csv`
 
-📸 *Screenshot:* `screenshots/s3_buckets.png`
+
 
 ---
 
-### 2️⃣ IAM Role  
+###  IAM Role  
 - Created `GlueCrawlerRole`.  
 - Attached permissions:  
   - `AWSGlueServiceRole`  
   - `AmazonS3FullAccess`  
   - `CloudWatchLogsFullAccess`  
 
-📸 *Screenshot:* `screenshots/iam_role.png`
+
 
 ---
 
-### 3️⃣ Glue Crawler  
+###  Glue Crawler  
 - Created crawler `ecommerce-raw-crawler`.  
 - Source: `ecommerce-raw-data` bucket.  
 - Target DB: `ecommerce_analysis_db`.  
 - IAM Role: `GlueCrawlerRole`.  
 - Run crawler → 7 tables discovered and added to Glue Catalog.
 
-📸 *Screenshot:* `screenshots/glue_crawler.png`
+
 
 ---
 
-### 4️⃣ CloudWatch Monitoring  
+###  CloudWatch Monitoring  
 - Verified crawler logs under `/aws-glue/crawlers/ecommerce-raw-crawler`.  
 - Confirmed tables created successfully and crawler state = READY.  
 
-📸 *Screenshot:* `screenshots/cloudwatch_log.png`
+
 
 ---
 
-### 5️⃣ Athena Configuration  
+###  Athena Configuration  
 - Set query results location to `s3://ecommerce-processed-data/athena-results/`.  
 - Selected database `ecommerce_analysis_db`.  
 - Main dataset used: `amazon_sale_report_csv`.
 
-📸 *Screenshot:* `screenshots/athena_query_results.png`
+
 
 ---
 
-## 🧮 Queries Executed in Athena ( LIMIT 10 )
+##  Queries Executed in Athena ( LIMIT 10 )
 
-### **1️⃣ Cumulative Sales Over Time for 2022**
+### ** Cumulative Sales Over Time for 2022**
 ```sql
 WITH t AS (
   SELECT 
@@ -103,7 +103,7 @@ LIMIT 10;
 
 ---
 
-### **2️⃣ Geographic Sales Analysis by State**
+### ** Geographic Sales Analysis by State**
 ```sql
 SELECT 
   "ship-state" AS state,
@@ -117,7 +117,7 @@ LIMIT 10;
 
 ---
 
-### **3️⃣ Sales Distribution by Category**
+### ** Sales Distribution by Category**
 ```sql
 SELECT 
   Category,
@@ -132,7 +132,7 @@ LIMIT 10;
 
 ---
 
-### **4️⃣ Top 3 Selling Products per Category**
+### ** Top 3 Selling Products per Category**
 ```sql
 WITH ranked AS (
   SELECT 
@@ -152,7 +152,7 @@ LIMIT 10;
 
 ---
 
-### **5️⃣ Monthly Sales Growth Analysis**
+### ** Monthly Sales Growth Analysis**
 ```sql
 WITH monthly AS (
   SELECT 
@@ -174,7 +174,7 @@ LIMIT 10;
 
 ---
 
-## 📊 Result Files  
+##  Result Files  
 
 | Query | Output CSV | Insight |
 |:--|:--|:--|
@@ -186,19 +186,11 @@ LIMIT 10;
 
 ---
 
-## 📸 Screenshots  
-Embed your screenshots in the repo:
 
-```markdown
-![S3 Buckets](screenshots/s3_buckets.png)
-![IAM Role](screenshots/iam_role.png)
-![CloudWatch Logs](screenshots/cloudwatch_log.png)
-![Athena Query Results](screenshots/athena_query_results.png)
-```
 
 ---
 
-## 🧾 Conclusion  
+## Conclusion  
 
 This hands-on lab demonstrated the complete AWS data analytics pipeline:  
 - **S3** provided secure and scalable storage.  
